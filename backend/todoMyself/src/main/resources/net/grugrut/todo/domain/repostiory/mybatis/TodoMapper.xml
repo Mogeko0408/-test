@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.todo.mapper.TodoMapper">
+<resultMap type="com.example.todo.item.Item" id="item">
+<id column="id" property="id" />
+<result column="name" property="name" />
+<result column="status" property="status" />
+</resultMap>
+
+<insert id="add" parameterType="com.example.todo.item.Item">
+INSERT INTO items(
+name,
+status
+)
+
+VALUES (
+#{name},
+#{status}
+)
+</insert>
+
+<select id=getAll resultMap=item>
+SELECT id, name, status
+FROM items
+WHERE id = #{id}
+</select>
+
+<update id=update parameterType="com.example.todo.item.Item">
+UPDATE items
+SET
+name = #{name},
+status = #{status}
+WHERE id = #{id}
+</update>
+
+<delete id=delete parameterType="Integer">
+DELETE FROM items
+WHERE id = #{id}
+</delete>
+</mapper>
